@@ -1,0 +1,48 @@
+#Notes about the project 
+#  Sistema de folha de pagamento
+#  Banco de dados de empregados de uma empresa
+#  Contem os dados dos empregados ex: cartao de ponto 
+#  O sistema pode pagar os empregados
+#  Os empregados devem receber o salario correto, no momento correto, pelo metodo que eles preferem
+#  Taxas e impostos são deduzidos de seus salarios
+
+ Trabalhador horista:
+	- recebem salario por hora trabalhada.
+	- submetem cartões de ponto todo dia para informar o numero de horas trabalhadas
+	- Se trabalhar mais de 8 horas, recebe 1.5 a taxa normal durante horas extras
+	- São pagos as sextas-feiras
+
+Trabalhador assalariado (com salario fixo mensal):
+	- São pagos no ultimo dia util do mes desconsiderando feriados
+	- podem ser comissionados:
+		- Caso sejam, recebem commissão, ou seja, um percentual das vendas que realizam.
+			- Submetem os resultados de vendas
+				- o resultado contém:
+					- data 
+					- valor da venda
+		- O percentual da comissão varia de empregado para empregado
+		- São pagos a cada 2 Sexta-feiras
+			- Neste momento iram receber o equivalente a duas semanas de salario fixo mais as commissões
+
+Empregados Geral:
+	- Podem escolher o método de pagamento 
+	- Podem receber um cheque pelos correios
+	- Podem receber um cheque em mãos
+	- Podem pedir depósito em conta bancária
+
+	- Empregados podem pertencer a um sindicato
+		- O sindicato cobra uma taxa mensal do empregado.
+			- A taxa varia de empregado para empregado
+			- A taxa sindical é deduzida do salário
+		- Ocasionalmente o sindicato pode cobrar taxas de serviços adicionais a um empregado.
+			- Essas taxas extras são submetidas mensalmente e são deduzidas do próximo contra-cheque do carinha.
+		- Por algum motivo a indentificação do empregado no sistema da folha de pagamento difere de sua identificão no sindicato.
+
+Folha de pagamento
+	
+	- Todo dia a folha de pagamento é rodada e deve
+	pagar os empregados cujos salários vencem naquele dia.
+	- O sistema receberá a data até a qual o pagamento deve ser feito e calculará o pagamento 
+	para cada empregado desde a ultima vez em que este foi pago.
+
+
