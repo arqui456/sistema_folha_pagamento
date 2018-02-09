@@ -1,5 +1,7 @@
 package salary;
 
+import utils.Date;
+
 public class Salary {
 	
 	private Type type;
