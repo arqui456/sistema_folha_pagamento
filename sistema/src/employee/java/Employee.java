@@ -1,6 +1,7 @@
 package employee.java;
 
 import salary.Salary;
+import sindicate.Sindicate;
 
 public class Employee {
 	
@@ -8,13 +9,15 @@ public class Employee {
 	private String name;
 	private String adress;
 	private Salary salary;
+	private Sindicate sindicate;
 	
 
 	public Employee() {
-		
+		this.id++;
 	}
 	
 	public Employee(String name, String adress) {
+		this();
 		this.name = name;
 		this.adress = adress;
 	}
@@ -22,6 +25,17 @@ public class Employee {
 	public Employee(String name, String adress, Salary salary){
 		this(name, adress);
 		this.salary = salary;
+	}
+	
+	public Employee(String name, String adress, Salary salary, boolean isSindicated){
+		this(name, adress,salary);
+		if(isSindicated == true){
+			this.sindicate = new Sindicate();
+		}
+	}
+	
+	public Employee(String name, String adress, Salary salary, Sindicate sindicate){
+		this(name, adress,salary);
 	}
 
 	public int getId() {

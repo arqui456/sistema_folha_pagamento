@@ -2,7 +2,7 @@ package salary;
 
 public class Salaried {
 	
-	private String payDay;
+	private String payDay = "every month's last day";
 	private Commissioned comissioned;
 	private double cash;
 
@@ -16,6 +16,7 @@ public class Salaried {
 		
 		if(isCommissioned == true){
 			this.comissioned.setCommissioned(true);
+			this.payDay = "every 2 weeks at friday";
 		}
 	}
 

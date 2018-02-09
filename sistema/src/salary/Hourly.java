@@ -2,7 +2,7 @@ package salary;
 
 public class Hourly {
 
-	private static String payDay = "Sexta";
+	private static String payDay = "every week friday";
 	private int workHours;
 	private int extraHours;
 	
