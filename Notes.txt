@@ -45,4 +45,6 @@ Folha de pagamento
 	- O sistema receberá a data até a qual o pagamento deve ser feito e calculará o pagamento 
 	para cada empregado desde a ultima vez em que este foi pago.
 
+REMAINDER > allways config git global
+
 
