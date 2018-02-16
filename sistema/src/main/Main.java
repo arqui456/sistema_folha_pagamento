@@ -386,11 +386,11 @@ public class Main {
 	}
 	
 	public static void main(String[] args) {
-		boolean exit = true; 
+		boolean exit = false; 
 		while(exit == false) {
 		    exit = menu();
 		}
-		testes();
+		//testes();
 		inputator.close();
 	}
 }
