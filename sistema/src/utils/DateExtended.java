@@ -8,6 +8,18 @@ public class DateExtended {
 	private boolean am_pm;
 	private String pm_am;
 	
+	public DateExtended(int hour, int minute) {
+	    if(hour < 0 || hour > 23)
+			System.err.println(TimeExceptions.invalidHour());
+		else
+			this.hour = hour;
+			
+		if(minute < 0 || minute > 59)
+			System.err.println(TimeExceptions.invalidMinute());
+		else
+			this.minute = minute;
+	}
+	
 	public DateExtended(int hour, int minute, boolean am_pm) {
 		if(am_pm == false) {
 			if(hour < 0 || hour > 23)

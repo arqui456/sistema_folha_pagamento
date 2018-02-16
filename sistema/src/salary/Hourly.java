@@ -2,39 +2,50 @@ package salary;
 
 public class Hourly {
 
-	private static String payDay = "every week friday";
-	private int workHours;
-	private int extraHours;
+	private double workHours;
+	private double extraHours;
+	private double wage;
 	
 	public Hourly() {
 		this.workHours = 0;
 		this.extraHours  = 0;
 	}
 	
-	public void setWorkHours(int workHours) {
-		this.workHours += workHours;
+	public Hourly(double wage) {
+		this();
+		this.wage = wage;
 	}
 	
-	public int getWorkHours(){
+	public void setWorkHours(double workHours) {
+		this.workHours = workHours;
+	}
+	
+	public double getWorkHours(){
 		return workHours;
 	}
 
-	public static String getPayDay() {
-		return payDay;
-	}
-
-	public int getExtraHours() {
+	public double getExtraHours() {
 		return extraHours;
 	}
 
-	public void setExtraHours(int extraHours) {
-		this.extraHours += extraHours;
+	public void setExtraHours(double extraHours) {
+		this.extraHours = extraHours;
+	}
+
+	public double getWage() {
+		return wage;
+	}
+
+	public void setWage(double wage) {
+		this.wage = wage;
 	}
 
 	@Override
 	public String toString() {
 		return "Hourly [workHours=" + workHours + ", extraHours=" + extraHours
-				+ "]";
+				+ ", wage=" + wage + "]";
 	}
+
+	
 
 }

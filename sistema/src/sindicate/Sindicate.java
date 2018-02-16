@@ -2,15 +2,15 @@ package sindicate;
 
 public class Sindicate {
 	
-	private int sindicateId;
+	private String sindicateId;
 	private double sindicateTax;
 
 	public Sindicate() {
-		this.sindicateId++;
 		this.sindicateTax = 0;
 	}
 	
-	public Sindicate(double sindicateTax){
+	public Sindicate(String sindicateId, double sindicateTax){
+		this.sindicateId = sindicateId;
 		this.sindicateTax = sindicateTax;
 	}
 
@@ -22,9 +22,19 @@ public class Sindicate {
 		this.sindicateTax = sindicateTax;
 	}
 
-	public int getSindicateId() {
+	public String getSindicateId() {
 		return sindicateId;
 	}
+
+	public void setSindicateId(String sindicateId) {
+		this.sindicateId = sindicateId;
+	}
+
+	@Override
+	public String toString() {
+		return "Sindicate [sindicateId=" + sindicateId + ", sindicateTax=" + sindicateTax + "]";
+	}
+
 	
 	
 

@@ -2,24 +2,28 @@ package salary;
 
 public class Salaried {
 	
-	private String payDay = "every month's last day";
-	private Commissioned comissioned;
-	private double cash;
+	private double wage;
 
 	public Salaried() {
-		this.cash = 0;
-		this.comissioned.setCommissioned(false);
+		this.wage = 0;
 	}
 	
-	public Salaried(double cash, boolean isCommissioned){
-		this.cash = cash;
-		
-		if(isCommissioned == true){
-			this.comissioned.setCommissioned(true);
-			this.payDay = "every 2 weeks at friday";
-		}
+	public Salaried(double wage){
+		this.wage = wage;
 	}
 
+	public double getWage() {
+		return wage;
+	}
 
+	public void setWage(double wage) {
+		this.wage = wage;
+	}
 
+	@Override
+	public String toString() {
+		return "Salaried [" + "wage: " + wage;
+	}
+	
+	
 }
