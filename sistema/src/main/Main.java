@@ -344,13 +344,13 @@ public class Main {
 		System.out.println("Existing payrolls");
 		payroll();
 		System.out.println("Input a existing paying date:");
+		inputator.nextLine();
 		String date = inputator.nextLine();
 		if (manager.searchAgenda(date) == true){
 			System.out.println("There are employee to be paid at this date");
 		}
 		else
 			System.out.println("No employee to be paid at this date");
-		System.out.println("Executing payroll");
 	}
 	
 	private static void Undo(){
