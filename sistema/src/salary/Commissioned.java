@@ -44,7 +44,9 @@ public class Commissioned {
 	}
 	
 	public Sales getLastSale() {
-		return this.sales.get(this.sales.size() - 1);
+		if(this.sales.size() != 0)
+		    return this.sales.get(this.sales.size() - 1);
+		else return null;
 	}
 	
 	public void removeLastSale() {
