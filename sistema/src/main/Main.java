@@ -181,7 +181,8 @@ public class Main {
         card.setEndHour(ddate);
         System.out.println(card);
 		int id = manager.FindEmployee(name);
-		manager.setPreviousCard(manager.getEmployees().get(id).getCard().get(manager.getEmployees().get(id).getCard().size() - 1));
+		if(manager.getEmployees().get(id).getCard().size() != 0)
+		    manager.setPreviousCard(manager.getEmployees().get(id).getCard().get(manager.getEmployees().get(id).getCard().size() - 1));
 		manager.getEmployees().get(id).addCard(card);
 		manager.setLastEmployeeThatSwitchedCards(id);
 	}
