@@ -31,7 +31,6 @@ public class Commissioned {
 		return cash;
 	}
 	
-	
 	public int getNumberOfSales() {
 		return numberOfSales;
 	}
@@ -42,6 +41,14 @@ public class Commissioned {
 	
 	public void addSale(Sales sale) {
 		this.sales.add(sale);
+	}
+	
+	public Sales getLastSale() {
+		return this.sales.get(this.sales.size() - 1);
+	}
+	
+	public void removeLastSale() {
+		this.sales.remove(this.sales.size() - 1);
 	}
 	
 	public double getWage() {

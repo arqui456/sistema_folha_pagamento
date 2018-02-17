@@ -8,8 +8,6 @@ import employee.Card;
 import employee.Employee;
 import employee.EmployeesManager;
 import salary.Commissioned;
-import salary.Hourly;
-import salary.Salaried;
 import salary.Sales;
 import salary.Type;
 import sindicate.Sindicate;
@@ -183,7 +181,9 @@ public class Main {
         card.setEndHour(ddate);
         System.out.println(card);
 		int id = manager.FindEmployee(name);
+		manager.setPreviousCard(manager.getEmployees().get(id).getCard().get(manager.getEmployees().get(id).getCard().size() - 1));
 		manager.getEmployees().get(id).addCard(card);
+		manager.setLastEmployeeThatSwitchedCards(id);
 	}
 	
 	private static void launchsale(){
@@ -206,7 +206,8 @@ public class Main {
 		System.out.println("Type in the sale's value: ");
 		double saleValue = inputator.nextDouble();
 		Sales sale = new Sales(saleDate, saleValue);
-		
+		manager.setPreviousSale(((Commissioned) manager.getEmployees().get(id).getType().getType()).getLastSale());
+		manager.setLastEmployeeThatAddedASale(id);
 		((Commissioned) manager.getEmployees().get(id).getType().getType()).addSale(sale);
 	}
 	
@@ -220,6 +221,9 @@ public class Main {
 		String service = inputator.nextLine();
 		System.out.println("Type in the service tax: ");
 		double tax = inputator.nextDouble();
+		
+		manager.setPreviousServiceTax(manager.getEmployees().get(id).getTax());
+		manager.setLastEmployeeThatAddedServiceTax(id);
 		manager.getEmployees().get(id).setTax(new ServiceTax(service, tax));
 	}
 	
@@ -349,7 +353,85 @@ public class Main {
 	}
 	
 	private static void Undo(){
+		System.out.println("What function do you wanna undo/redo ?");
+		System.out.println("    1. Add a employee");
+		System.out.println("    2. Remove a employee");
+		System.out.println("    3. Launch a point card");
+		System.out.println("    4. Launch a sales result");
+		System.out.println("    5. Launch a service tax");
+		System.out.println("    6. alter a employee data");
+		System.out.println("    7. Execute payroll");
+		int choice = inputator.nextInt();
+		while(choice < 1 || choice > 7) {
+			System.out.println("Invalid input, try again: ");
+			choice = inputator.nextInt();
+		}
 		
+		System.out.println("    1.Undo\n"
+				         + "    2.Redo");
+		int choice2 = inputator.nextInt();
+		while(choice != 1 && choice != 2) {
+			System.out.println("Invalid input, try again: ");
+			choice2 = inputator.nextInt();
+		}
+		
+		if(choice2 == 1) {
+			switch(choice) {
+		    case 1:
+		    	manager.DeleteEmployee(manager.getLastAddedEmployeeName());
+		    	break;
+		    case 2:
+		    	manager.AddEmployee(manager.getLastRemovedEmployee());
+		    	break;
+		    case 3:
+		    	manager.getEmployees().get(manager.getLastEmployeeThatSwitchedCards()).removeCard();
+		    	break;
+		    case 4:
+		    	((Commissioned) manager.getEmployees().get(manager.getLastEmployeeThatAddedASale()).getType().getType()).removeLastSale();
+		    	break;
+		    case 5:
+		    	manager.getEmployees().get(manager.getLastEmployeeThatAddedServiceTax()).removeServiceTax();
+		    	break;
+		    case 6:
+		    	manager.getEmployees().remove(manager.getLastAlteredEmployeeName());
+		    	manager.AddEmployee(manager.getLastAlteredEmployee());
+		    	break;
+		    case 7:
+		    	break;
+		    }
+		}
+		else {
+			switch(choice) {
+		    case 1:
+		    	manager.DeleteEmployee(manager.getLastAddedEmployeeName());
+		    	addEmployee();
+		    	break;
+		    case 2:
+		    	manager.AddEmployee(manager.getLastRemovedEmployee());
+		    	remEmployee();
+		    	break;
+		    case 3:
+		    	manager.getEmployees().get(manager.getLastEmployeeThatSwitchedCards()).addCard(manager.getPreviousCard());
+		    	launchCard();
+		    	break;
+		    case 4:
+		    	((Commissioned) manager.getEmployees().get(manager.getLastEmployeeThatAddedASale()).getType().getType()).addSale(manager.getPreviousSale());
+		    	launchsale();
+		    	break;
+		    case 5:
+		    	manager.getEmployees().get(manager.getLastEmployeeThatAddedServiceTax()).setTax(manager.getPreviousServiceTax());
+		    	launchServiceTax();
+		    	break;
+		    case 6:
+		    	manager.getEmployees().remove(manager.getLastAlteredEmployeeName());
+		    	manager.AddEmployee(manager.getLastAlteredEmployee());
+		    	altEmployee();
+		    	break;
+		    case 7:
+		    	excPayroll();
+		    	break;
+		    }
+		}
 	}
 	
     private static void payroll() {

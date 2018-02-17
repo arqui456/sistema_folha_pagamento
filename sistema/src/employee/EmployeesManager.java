@@ -3,6 +3,7 @@ package employee;
 import java.util.ArrayList;
 
 import salary.Hourly;
+import salary.Sales;
 
 public class EmployeesManager {
 	
@@ -14,6 +15,15 @@ public class EmployeesManager {
 	private int uniqueId = 0;
 	private int lastChange = -1;
 	private double aux = 0;
+	private Card previousCard;
+	private int lastEmployeeThatSwitchedCards;
+	private Sales previousSale;
+	private int lastEmployeeThatAddedASale;
+	private ServiceTax previousServiceTax;
+	private int lastEmployeeThatAddedServiceTax;
+	private Employee lastAlteredEmployee;
+	private int lastAlteredEmployeeName;
+	
 	/*
 	 * @lastChange:
 	 * if 1 = added employee
@@ -34,7 +44,6 @@ public class EmployeesManager {
 	}
 
 	public void DeleteEmployee(String name) {
-		
 		for(int i = 0; i < this.employees.size(); i++){
 			if(this.employees.get(i) != null && this.employees.get(i).getName().equals(name)){
 				lastRemovedEmployee = employees.get(i);
@@ -51,7 +60,6 @@ public class EmployeesManager {
 	
 	public int FindEmployee(String name) {
 		int index;
-		
 		for(int i = 0; i < this.employees.size(); i++){
 			if(this.employees.get(i) != null && this.employees.get(i).getName().equals(name)){
 				index = i;
@@ -62,7 +70,6 @@ public class EmployeesManager {
 				System.out.println("The requested person is not employed");
 			}
 		}
-		
 		return -1;
 	}
 
@@ -165,13 +172,73 @@ public class EmployeesManager {
 		}
 		return cash;
 	}
+	
+	public Card getPreviousCard() {
+		return previousCard;
+	}
+
+	public void setPreviousCard(Card previousCard) {
+		this.previousCard = previousCard;
+	}
+
+	public int getLastEmployeeThatSwitchedCards() {
+		return lastEmployeeThatSwitchedCards;
+	}
+
+	public void setLastEmployeeThatSwitchedCards(int lastEmployeeThatSwitchedCards) {
+		this.lastEmployeeThatSwitchedCards = lastEmployeeThatSwitchedCards;
+	}
+	
+	public Sales getPreviousSale() {
+		return previousSale;
+	}
+
+	public void setPreviousSale(Sales previousSale) {
+		this.previousSale = previousSale;
+	}
+
+	public int getLastEmployeeThatAddedASale() {
+		return lastEmployeeThatAddedASale;
+	}
+
+	public void setLastEmployeeThatAddedASale(int lastEmployeeThatAddedASale) {
+		this.lastEmployeeThatAddedASale = lastEmployeeThatAddedASale;
+	}
+	
+	public ServiceTax getPreviousServiceTax() {
+		return previousServiceTax;
+	}
+
+	public void setPreviousServiceTax(ServiceTax previousServiceTax) {
+		this.previousServiceTax = previousServiceTax;
+	}
+
+	public int getLastEmployeeThatAddedServiceTax() {
+		return lastEmployeeThatAddedServiceTax;
+	}
+
+	public void setLastEmployeeThatAddedServiceTax(int lastEmployeeThatAddedServiceTax) {
+		this.lastEmployeeThatAddedServiceTax = lastEmployeeThatAddedServiceTax;
+	}
+	
+	public Employee getLastAlteredEmployee() {
+		return lastAlteredEmployee;
+	}
+
+	public void setLastAlteredEmployee(Employee lastAlteredEmployee) {
+		this.lastAlteredEmployee = lastAlteredEmployee;
+	}
+
+	public int getLastAlteredEmployeeName() {
+		return lastAlteredEmployeeName;
+	}
+
+	public void setLastAlteredEmployeeName(int lastAlteredEmployeeName) {
+		this.lastAlteredEmployeeName = lastAlteredEmployeeName;
+	}
 
 	@Override
 	public String toString() {
 		return "EmployeesManager [employees=" + employees + ", totalEmployees=" + totalEmployees + "\n";
 	}
-	
-	
-	
-	
 }

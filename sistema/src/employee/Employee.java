@@ -102,6 +102,10 @@ public class Employee {
 		this.card.add(card);
 	}
 	
+	public void removeCard() {
+		this.card.remove(this.card.size() - 1);
+	}
+	
 	public String getPayday() {
 		return payday;
 	}
@@ -116,6 +120,10 @@ public class Employee {
 
 	public void setTax(ServiceTax tax) {
 		this.tax = tax;
+	}
+	
+	public void removeServiceTax() {
+		this.tax = null;
 	}
 	
 	public void calculateHours(){
