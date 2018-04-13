@@ -1,13 +1,13 @@
 package salary;
 
-
+import utils.PayMethod;
 
 public class Type {
 	
 	private Object type;
 	private int typeIndex;
 	private double wage;
-	private String payMethod;
+	private PayMethod payMethod;
 	
 	public Type(int typeIndex, double wage) {
 		this.typeIndex = typeIndex;
@@ -44,11 +44,11 @@ public class Type {
 		this.wage = wage;
 	}
 	
-	public String getPayMethod() {
+	public PayMethod getPayMethod() {
 		return payMethod;
 	}
 	
-	public void setPayMethod(String payMethod) {
+	public void setPayMethod(PayMethod payMethod) {
 		this.payMethod = payMethod;
 	}
 
@@ -56,6 +56,4 @@ public class Type {
 	public String toString() {
 		return "Type [type=" + type + "]";
 	}
-	
-	
 }

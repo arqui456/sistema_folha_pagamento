@@ -1,20 +1,26 @@
 package employee;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import salary.Hourly;
 import salary.Sales;
+import salary.Type;
+import utils.LastChange;
+import utils.PayMethod;
 
 public class EmployeesManager {
 	
 	private ArrayList<Employee> employees = new ArrayList<Employee>();
 	private Payroll pay = new Payroll();
-	private Employee lastRemovedEmployee;
-	private String lastAddedEmployeeName;
+	
 	private int totalEmployees = 0;
 	private int uniqueId = 0;
-	private int lastChange = -1;
+	private LastChange lastChange = LastChange.NO_CHANGE;
 	private double aux = 0;
+	
+	private Employee lastRemovedEmployee;
+	private String lastAddedEmployeeName;
 	private Card previousCard;
 	private int lastEmployeeThatSwitchedCards;
 	private Sales previousSale;
@@ -24,14 +30,8 @@ public class EmployeesManager {
 	private Employee lastAlteredEmployee;
 	private int lastAlteredEmployeeName;
 	
-	/*
-	 * @lastChange:
-	 * if 1 = added employee
-	 * if 2 = deleted employee
-	 * if 3 = altered employee
-	 * 
-	 */
-
+	private static Scanner inputator = new Scanner(System.in);
+	
 	public EmployeesManager() {
 		this.totalEmployees = 0;	
 	}
@@ -72,6 +72,105 @@ public class EmployeesManager {
 		}
 		return -1;
 	}
+	
+	public void AltEmployee() {
+		
+		System.out.println("Type in the employee's name: ");
+		String name = inputator.nextLine();
+		int id = this.FindEmployee(name);
+		if(id == -1) return;
+		
+		System.out.println("What attribute do you what to edit? ");
+		System.out.println("    1. Employee's name");
+		System.out.println("    2. Employee's adress");
+		System.out.println("    3. Employee's payment type");
+		System.out.println("    4. Employee's payment method");
+		System.out.println("    5. Employee's syndicability");
+		System.out.println("    6. Employee's syndicate id");
+		System.out.println("    7. Employee's syndicate tax");
+			
+		int choice = inputator.nextInt();
+		while(choice < 1 || choice > 7) {
+			System.out.println("Invalid input, try again: ");
+			choice = inputator.nextInt();
+		}
+		
+		switch(choice) {
+		    case 1:
+		    	System.out.println("Type in the new employee name: ");
+		    	name = inputator.nextLine();
+		    	this.getEmployees().get(id).setName(name);
+		    	break;
+		    case 2:
+		    	System.out.println("Type in the new employee adress: ");
+		    	name = inputator.nextLine();
+		    	this.getEmployees().get(id).setAdress(name);
+		    	break;
+		    case 3:
+		    	System.out.println("Select the new type of payment for the employee: ");
+				System.out.println("    1.Hourly wage");
+				System.out.println("    2.Salaried");
+				System.out.println("    3.Commissioned");
+				choice = inputator.nextInt();
+				while(choice < 1 || choice > 3) {
+					System.out.println("Invalid input, try again: ");
+					choice = inputator.nextInt();
+				}
+				double wage = this.getEmployees().get(id).getType().getWage();
+				Type type = new Type(choice, wage);
+				this.getEmployees().get(id).setType(type);
+				break;
+		    case 4:
+		    	System.out.println("Select the new payment method for the employee: ");
+		    	System.out.println("    1.Check send via mail");
+				System.out.println("    2.Check in hand");
+				System.out.println("    3.Bank account deposit");
+				choice = inputator.nextInt();
+				while(choice < 1 || choice > 3) {
+					System.out.println("Invalid input, try again");
+					choice = inputator.nextInt();
+				}
+				if(choice == 1)
+					this.getEmployees().get(id).getType().setPayMethod(PayMethod.CHECK_SEND_BY_EMAIL);
+				else if(choice == 2)
+					this.getEmployees().get(id).getType().setPayMethod(PayMethod.CHECK_IN_HAND);
+				else
+					this.getEmployees().get(id).getType().setPayMethod(PayMethod.BANK_ACCOUNT_DEPOSIT);
+		    	break;
+		    case 5:
+		    	System.out.println("Is the employee syndicated?");
+		    	System.out.println("    1. Yes");
+		    	System.out.println("    2. No");
+		    	choice = inputator.nextInt();
+		    	while(choice < 1 || choice > 2) {
+		    		System.out.println("Invalid input, try again: ");
+		    		choice = inputator.nextInt();
+		    	}
+		    	if(choice == 1)
+		    		this.getEmployees().get(id).setSindicate();
+		    	else
+		    		this.getEmployees().get(id).setSindicate(null);
+		    	break;
+		    case 6:
+		    	if(this.getEmployees().get(id).getSindicate() != null) {
+		    		System.out.println("type in the syndicate id: ");
+		    		name = inputator.nextLine();
+		    		this.getEmployees().get(id).getSindicate().setSindicateId(name);
+		    	}
+		    	else
+		    		System.out.println("Employee is not part of a syndicate!");
+		    	break;
+		    case 7:
+		    	if(this.getEmployees().get(id).getSindicate() != null) {
+		    		System.out.println("type in the syndicateTax: ");
+		    		double tax = inputator.nextDouble();
+		    		this.getEmployees().get(id).getSindicate().setSindicateTax(tax);
+		    	}
+		    	else
+		    		System.out.println("Employee is not part of a syndicate!");
+		    	break;
+		}
+	}
 
 	public ArrayList<Employee> getEmployees() {
 		return employees;
@@ -109,11 +208,11 @@ public class EmployeesManager {
 		this.lastAddedEmployeeName = lastAddedEmployeeName;
 	}
 	
-	public int getLastChange() {
+	public LastChange getLastChange() {
 		return lastChange;
 	}
 
-	public void setLastChange(int lastChange) {
+	public void setLastChange(LastChange lastChange) {
 		this.lastChange = lastChange;
 	}
 	

@@ -1,6 +1,6 @@
 package salary;
 
-public class Salaried {
+public class Salaried extends Salary {
 	
 	private double wage;
 

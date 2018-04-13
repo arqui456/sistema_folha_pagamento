@@ -1,6 +1,6 @@
 package salary;
 
-public class Hourly {
+public class Hourly extends Salary {
 
 	private double workHours;
 	private double extraHours;

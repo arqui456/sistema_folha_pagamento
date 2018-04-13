@@ -2,7 +2,7 @@ package salary;
 
 import java.util.ArrayList;
 
-public class Commissioned {
+public class Commissioned extends Salary {
 
 	private ArrayList<Sales> sales = new ArrayList<Sales>();
 	private int numberOfSales;
